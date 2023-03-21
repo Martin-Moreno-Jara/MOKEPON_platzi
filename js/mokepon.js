@@ -13,7 +13,8 @@ let rdRatigueya = document.getElementById("ratigueya");
 let rdLangostelvis = document.getElementById("langostelvis");
 let rdTucapalma = document.getElementById("tucapalma");
 let rdPydos = document.getElementById("pydos");
-
+let mascotName = document.getElementById("mascotName");
+let enemyName = document.getElementById("enemyName");
 //assign events for buttons and whatnot ++++++++++++
 btnSelectMascot.addEventListener("click",selectMascot)
 
@@ -33,7 +34,10 @@ function selectMascot(){
         selectedMascot=rdPydos.id;
     }else{
         alert("Sie mussen etwas entscheiden")
-        selectedMascot="No mascot selected";
+        selectedMascot="";
     }
-    console.log(selectedMascot)
+    mascotName.innerHTML=selectedMascot;
+}
+function selectEnemy(){
+    
 }
