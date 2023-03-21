@@ -1,5 +1,6 @@
 //declaration of variables ++++++++++++++++++++++++
 let selectedMascot;
+let enemy;
 //Get elements from html +++++++++++++++++++++++
 let btnSelectMascot = document.getElementById("btnSelectMascot");
 let btnReload = document.getElementById("btnReload");
@@ -19,18 +20,19 @@ btnSelectMascot.addEventListener("click",selectMascot)
 //Functions for the events +++++++++++++++++++++++++
 function selectMascot(){
     if(rdHipodoge.checked){
-        selectedMascot=rdHipodoge;
+        selectedMascot=rdHipodoge.id;
     }else if(rdCapipepo.checked){
-        selectedMascot=rdCapipepo;
+        selectedMascot=rdCapipepo.id;
     }else if(rdRatigueya.checked){
-        selectedMascot=rdRatigueya;
+        selectedMascot=rdRatigueya.id;
     }else if(rdLangostelvis.checked){
-        selectedMascot=rdLangostelvis;
+        selectedMascot=rdLangostelvis.id;
     }else if(rdTucapalma.checked){
-        selectedMascot=rdTucapalma;
+        selectedMascot=rdTucapalma.id;
     }else if(rdPydos.checked){
-        selectedMascot=rdPydos;
+        selectedMascot=rdPydos.id;
     }else{
+        alert("Sie mussen etwas entscheiden")
         selectedMascot="No mascot selected";
     }
     console.log(selectedMascot)
