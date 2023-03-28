@@ -1,6 +1,12 @@
 //declaration of variables ++++++++++++++++++++++++
 let selectedMascot;
 let enemy;
+let mascotAttack;
+let enemyAttack;
+let result;
+
+let mascotLives=3;
+let enemyLives=3;
 
 //Get elements from html +++++++++++++++++++++++
 let btnSelectMascot = document.getElementById("btnSelectMascot");
@@ -17,16 +23,27 @@ let rdTucapalma = document.getElementById("tucapalma");
 let rdPydos = document.getElementById("pydos");
 let mascotName = document.getElementById("mascotName");
 let enemyName = document.getElementById("enemyName");
+let sectionMessages = document.getElementById("messages")
+let mascotL = document.getElementById("mascotLives");
+let enemyL = document.getElementById("enemyLives");
+mascotL.innerHTML=mascotLives;
+enemyL.innerHTML=enemyLives;
 
-let enemyOptions={  1:rdHipodoge.id,
+let enemyOptions={  
+    1:rdHipodoge.id,
     2:rdCapipepo.id,
     3:rdRatigueya.id,
     4:rdLangostelvis.id,
     5:rdTucapalma.id,
     6:rdPydos.id}
+let attackOptions={ 1:"Fuego",
+                    2:"Agua",
+                    3:"Tierra"}
 //assign events for buttons and whatnot ++++++++++++
 btnSelectMascot.addEventListener("click",selectMascots)
-
+btnEarth.addEventListener("click",earthAttack);
+btnWater.addEventListener("click",waterAttack);
+btnFire.addEventListener("click",fireAttack);
 //Functions for the events +++++++++++++++++++++++++
 function selectMascots(){
     var isSelected=true;
@@ -50,16 +67,63 @@ function selectMascots(){
     }
     mascotName.innerHTML=selectedMascot;
     if(isSelected){
-        selectEnemy();
+        selectEnemy(1,6);
     }
     enemyName.innerHTML=enemy;
 }
-function selectEnemy(){
-    let randomNumber = generate_random(1,6);
+function waterAttack(){
+    mascotAttack=attackOptions[2];
+    selectEnemyAttack();
+    combatResult()
+}
+function fireAttack(){
+    mascotAttack=attackOptions[1];
+    selectEnemyAttack();
+    combatResult()
+}
+function earthAttack(){
+    mascotAttack=attackOptions[3];
+    selectEnemyAttack();
+    combatResult()
+}
+function selectEnemyAttack(){
+    var number = generate_random(1,3);
+    enemyAttack=attackOptions[number] 
+}
+function selectEnemy(min,max){
+    let randomNumber = generate_random(min,max);
     enemy=enemyOptions[randomNumber];
 }
 
 function generate_random(min,max){
     return Math.floor(Math.random()*(max-min+1))+min;
+}
+
+function combatResult(){
+    if(mascotAttack==enemyAttack){
+        result="empate";
+    }else if(mascotAttack=="Agua" && enemyAttack=="Fuego"){
+        result ="Ganaste 🎉"
+        enemyLives-- 
+    }else if(mascotAttack=="Fuego" && enemyAttack=="Tierra"){
+        result ="Ganaste 🎉" 
+        enemyLives--
+    }else if(mascotAttack=="Tierra" && enemyAttack=="Agua"){
+        result ="Ganaste 🎉"
+        enemyLives-- 
+    }else{
+        result="perdiste 😭"
+        mascotLives--;
+    }
+    mascotL.innerHTML=mascotLives;
+    enemyL.innerHTML=enemyLives;
+    createMessage();
+}
+
+function createMessage(){
+    let parrafo = document.createElement("p");
+    parrafo.innerHTML="Tu mascota atacó con "+mascotAttack+", la mascota enemiga atacó con "+enemyAttack+" - "+result;
+    sectionMessages.appendChild(parrafo);
+
 }
 
