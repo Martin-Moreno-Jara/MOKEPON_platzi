@@ -44,6 +44,12 @@ btnSelectMascot.addEventListener("click",selectMascots)
 btnEarth.addEventListener("click",earthAttack);
 btnWater.addEventListener("click",waterAttack);
 btnFire.addEventListener("click",fireAttack);
+btnReload.addEventListener("click",doLoad)
+
+function doLoad(){
+   location.reload();
+}
+
 //Functions for the events +++++++++++++++++++++++++
 function selectMascots(){
     var isSelected=true;
@@ -66,11 +72,14 @@ function selectMascots(){
         isSelected=false;
     }
     mascotName.innerHTML=selectedMascot;
+    btnSelectMascot.disabled = true;
     if(isSelected){
         selectEnemy(1,6);
     }
     enemyName.innerHTML=enemy;
+
 }
+
 function waterAttack(){
     mascotAttack=attackOptions[2];
     selectEnemyAttack();
@@ -118,6 +127,25 @@ function combatResult(){
     mascotL.innerHTML=mascotLives;
     enemyL.innerHTML=enemyLives;
     createMessage();
+    checkLives();
+    
+}
+function checkLives(){
+    let defeat = document.createElement("p");
+    if(mascotLives==0){
+        defeat.innerHTML = "Has perdido"
+        sectionMessages.appendChild(defeat);
+        blockButtons();
+    }else if(enemyLives==0){
+        defeat.innerHTML="Has ganado"
+        sectionMessages.appendChild(defeat);
+        blockButtons();
+    }
+}
+function blockButtons(){
+    btnFire.disabled=true;
+    btnEarth.disabled=true;
+    btnWater.disabled=true;
 }
 
 function createMessage(){
