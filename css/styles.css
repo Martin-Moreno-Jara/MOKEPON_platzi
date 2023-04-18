@@ -4,5 +4,19 @@
     height: 40px;
     font-family: monospace;
     background-color:#0FDFE5;
-
+}
+label{
+    background-color: tomato;
+    width: 500px;
+    height: 40px;
+}
+input{
+    background-color: orange;
+    width: 500px;
+    height: 40px;
+}
+button{
+    background-color: violet;
+    width: 500px;
+    height: 40px;
 }
