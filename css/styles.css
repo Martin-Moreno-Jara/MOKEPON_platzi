@@ -5,18 +5,33 @@
     font-family: monospace;
     background-color:#0FDFE5;
 }
-label{
-    background-color: tomato;
-    width: 500px;
-    height: 40px;
+#mascotSelect{
+display: flex;
+height:100vh;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 }
+.mokeponCard{
+    display: flex;
+    width: 200px;
+    height: 100px;
+    background: aquamarine;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border: 1px solid black;
+
+}
+.btnSelect{
+    width: 180px;
+    height: 80px;
+    background: crimson;
+    padding: 5px;
+    margin: 2px;
+    border: 2px solid goldenrod;
+}
+
 input{
-    background-color: orange;
-    width: 500px;
-    height: 40px;
-}
-button{
-    background-color: violet;
-    width: 500px;
-    height: 40px;
+display: none;
 }
