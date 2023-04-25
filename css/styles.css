@@ -27,14 +27,22 @@ align-items: center;
 }
 .mokeponCard{
     display: flex;
-    width: 200px;
-    height: 100px;
-    background: aquamarine;
+    width: 270px;
+    height: 160px;
+    background: #5190C6;
     padding: 10px;
     box-sizing: border-box;
     margin: 5px;
     border: 1px solid black;
-
+    border-radius: 20px;
+    font-weight: bold;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+.mokeponCard img{
+    width: 150px;
+    height: 130px;
 }
 .btnSelect{
     width: 180px;
