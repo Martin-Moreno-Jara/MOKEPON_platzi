@@ -1,16 +1,29 @@
-.title{
-    color: hotpink;
-    width: 500px;
-    height: 40px;
-    font-family: monospace;
-    background-color:#0FDFE5;
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
+body{
+    font-family: 'Fredoka', sans-serif;
+    background-color:#2C6393;
 }
+.title{
+    color: white;
+    font-size: 40px;
+}
+.subtitulo{
+    color: white;
+    font-size: 28px;
+
+}
+
 #mascotSelect{
 display: flex;
 height:100vh;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+}
+
+.tarjetas{
+    display: flex;
+    gap: 5px;
 }
 .mokeponCard{
     display: flex;
@@ -27,6 +40,7 @@ align-items: center;
     width: 180px;
     height: 80px;
     background: crimson;
+    box-sizing: border-box;
     padding: 5px;
     margin: 2px;
     border: 2px solid goldenrod;
