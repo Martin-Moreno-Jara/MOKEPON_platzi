@@ -46,12 +46,19 @@ align-items: center;
 }
 .btnSelect{
     width: 180px;
-    height: 80px;
-    background: crimson;
+    height: 40px;
+    font-family: 'Fredoka', sans-serif;
+    color:white;
+    font-weight:bold;
+    background: #3093C8;
+    border-radius: 20px;
     box-sizing: border-box;
     padding: 5px;
     margin: 2px;
-    border: 2px solid goldenrod;
+    border: 2px solid white;
+    justify-content: center;
+    align-items: center;
+    margin-top:10px;
 }
 
 input{
