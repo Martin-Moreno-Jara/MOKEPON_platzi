@@ -74,6 +74,29 @@ align-items: center;
     color: white;
     font-family: 'Fredoka', sans-serif;
 }
+#messages{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    height: 103px;
+    width: 329px;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: #23BBDC;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+#btnReload{
+    border: none;
+    color: white;
+    background-color: #23BBDC;
+    height: 28px;
+    width: 100px;
+    border-radius: 10px;
+    font-family: 'Fredoka', sans-serif;
+}
 
 input{
 display: none;

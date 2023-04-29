@@ -33,7 +33,12 @@ let enemyOptions={  // All possible mascots the player can select
 
 let mascotName = document.getElementById("mascotName");
 let enemyName = document.getElementById("enemyName");
-let sectionMessages = document.getElementById("messages")
+
+let sectionMessages = document.getElementById("resultado")
+let ataqueJugador = document.getElementById("ataqueJugador")
+let ataqueEnemigo = document.getElementById("ataqueEnemigo")
+let botonAtaque = document.getElementById("botonAtaque")
+
 let sectionAttack = document.getElementById("attackSelect");
 let sectionMascots = document.getElementById("mascotSelect");
 let mascotL = document.getElementById("mascotLives");
@@ -131,22 +136,20 @@ function combatResult(){ //evaluates the attacks and gives the output, life dedu
     
 }
 function createMessage(){ //creates a message after each attack
-    let parrafo = document.createElement("p");
-    parrafo.innerHTML="Tu mascota atacó con "+mascotAttack+", la mascota enemiga atacó con "+enemyAttack+" - "+result;
-    sectionMessages.appendChild(parrafo);
+
+    sectionMessages.innerHTML=result;
+    ataqueJugador.innerHTML="Tu mascota atacó con "+mascotAttack;
+    ataqueEnemigo.innerHTML= "La mascota enemiga atacó con "+enemyAttack;
 
 }
 
 function checkLives(){ //checks wether the enemy or the player has lost 
-    let defeat = document.createElement("p");
     if(mascotLives==0){
-        defeat.innerHTML = "Has perdido"
-        sectionMessages.appendChild(defeat);
+        sectionMessages.innerHTML = "Has perdido";
         blockButtons();
        btnReload.style.display="block";
     }else if(enemyLives==0){
-        defeat.innerHTML="Has ganado"
-        sectionMessages.appendChild(defeat);
+        sectionMessages.innerHTML="Has ganado"
         blockButtons();
         btnReload.style.display="block";
     }
