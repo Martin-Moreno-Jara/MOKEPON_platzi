@@ -60,6 +60,20 @@ align-items: center;
     align-items: center;
     margin-top:10px;
 }
+#attackSelect{
+    flex-direction: column;
+    align-items: center;
+} 
+.botonAtaque{
+    background-color: #3093C8;
+    height: 59px;
+    width: 100px;
+    margin: 5px;
+    border-radius: 10px;
+    border-color: transparent;
+    color: white;
+    font-family: 'Fredoka', sans-serif;
+}
 
 input{
 display: none;

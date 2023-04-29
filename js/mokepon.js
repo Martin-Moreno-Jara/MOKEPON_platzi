@@ -78,7 +78,7 @@ function selectMascots(){ //let's player select, and selects for the enemy
     if(isSelected){
         selectEnemy(1,6);
     }
-    sectionAttack.style.display = "block";
+    sectionAttack.style.display = "flex";
     sectionMascots.style.display = "none";
     enemyName.innerHTML=enemy;
 }
