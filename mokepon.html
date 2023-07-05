@@ -7,8 +7,10 @@
 </head>
 
 <body>
-    <header class="head-foot">
+    <header >
+     <div class="head-foot">
         <h1 class="main-titulo">MOKEPON </h1> 
+    </div>
     </header>
 
     <section id="mascotSelect">
@@ -53,9 +55,6 @@
                 <img src="./assets/pydos.jpeg" alt="Capipepo"/>
             </label> <br>  
         </div>
-        <div class="grid-masc-select">
-            <p>hola</p>
-        </div>
 
         <p>
             <button class="btnSelect" id="btnSelectMascot">Seleccionar</button>
@@ -63,16 +62,16 @@
     </section>
 
     <section id="attackSelect">
-        <h1 class="title">MOKEPON 🔥💧🌱</h1> 
-        <h2 class="subtitulo">Elige tu ataque</h2>
+
+        <h2 class="main-subtitulo">Elige tu ataque</h2>
         <div class="tarjetasAtaques">
-            <button id="btnFire" class="botonAtaque">Fuego 🔥</button>
-            <button id="btnWater" class="botonAtaque">Agua 💧</button>
-            <button id="btnEarth" class="botonAtaque">Tierra 🌱</button>
+            <button id="btnFire" class="botonAtaque">Fuego <br>🔥</button>
+            <button id="btnWater" class="botonAtaque">Agua <br>💧</button>
+            <button id="btnEarth" class="botonAtaque">Tierra <br>🌍</button>
         </div>
 
             <div id="messages">
-                <p id="resultado">Animos 🤙</p>
+                <p id="resultado" class="normal-text">Ataca para empezar</p>
                 
                 <section id="repeatGame">
                     <button id="btnReload">Reiniciar</button>
@@ -80,16 +79,23 @@
             </div>
 
 
-        <div class="ataquePadre">
-            <div class="ataqueJugador">
-                <span id="mascotName"></span>
-                <span id="mascotLives"></span>
-                <p id="ataqueJugador"></p>
-            </div>
-            <div class="ataqueEnemigo">
-                <span id="enemyName"></span>
-                <span id="enemyLives"></span>
-                <p id="ataqueEnemigo"></p>
+            <div class="ataquePadre">
+                <div class="ataqueJugador">
+                    <span id="mascotName"></span>
+                    <div >
+                        <img src="assets/capipepo.jpg" class="imagen" id="jugador_imagen">
+                    </div>
+                    <span id="mascotLives"></span>
+                    <p id="ataqueJugador"></p>
+                </div>
+                <div class="ataqueEnemigo">
+                    <span id="enemyName"></span>
+                    <div>
+                        <img src="assets/capipepo.jpg" class="imagen" id="enemigo_imagen">
+                    </div>
+                    <span id="enemyLives"></span>
+                    <p id="ataqueEnemigo"></p>
+                </div>
             </div>
         </div>
         

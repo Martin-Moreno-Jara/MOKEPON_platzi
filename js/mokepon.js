@@ -43,6 +43,9 @@ let sectionAttack = document.getElementById("attackSelect");
 let sectionMascots = document.getElementById("mascotSelect");
 let mascotL = document.getElementById("mascotLives");
 let enemyL = document.getElementById("enemyLives");
+let divMessages = document.getElementById("messages");
+let divJugador_img = document.getElementById("jugador_imagen")
+let divEnemigo_img = document.getElementById("enemigo_imagen")
 
 
 
@@ -53,44 +56,105 @@ btnWater.addEventListener("click",waterAttack);
 btnFire.addEventListener("click",fireAttack);
 btnReload.addEventListener("click",doLoad)
 
+selection_backgrounds = [
+
+    "assets/background_select/forest_day.webp",
+    "assets/background_select/forest_noon.jpg",
+    "assets/background_select/forest-midday.jpeg",
+    "assets/background_select/forest-night.jpg",
+    "assets/background_select/street-noon.jpeg",
+]
+
+function set_selection_background(){
+    randomIndex = generate_random(0,4)
+    selected_image = selection_backgrounds[randomIndex]
+    sectionMascots.style.backgroundImage = "url(\"" + selected_image + "\")";
+
+}
+
+window.onload = function (){
+    set_selection_background()
+
+}
+fight_backgrounds = [
+    "assets/background_fight/fight1.webp",
+    "assets/background_fight/fight2.webp",
+    "assets/background_fight/fight3.webp",
+    "assets/background_fight/fight4.jpg"
+]
+
+function set_fight_background(){
+    randomIndex = generate_random(0,3)
+    selected_image = fight_backgrounds[randomIndex]
+    sectionAttack.style.backgroundImage = "url(\"" + selected_image + "\")";
+}
+
 
 mascotL.innerHTML=mascotLives; //Initialy assing lives to both player and enemy
 enemyL.innerHTML=enemyLives;
 sectionAttack.style.display = "none";
 btnReload.style.display="none";
+
+mokepons_imgs = {
+    capipepo:"assets/capipepo.jpg",
+    hipodoge:"assets/hipodoge.jpg",
+    langostelvis:"assets/langostelvis.jpg",
+    pydos:"assets/pydos.jpeg",
+    ratigueya:"assets/ratigueya.jpeg",
+    tucapalma:"assets/tucapalma.jpg"
+}
+
 function selectMascots(){ //let's player select, and selects for the enemy
     var isSelected=true;
     selectedMascot="";
     enemy="";
+    img_route="";
     if(rdHipodoge.checked){
         selectedMascot=rdHipodoge.id;
+        img_route= mokepons_imgs.hipodoge;
+
     }else if(rdCapipepo.checked){
         selectedMascot=rdCapipepo.id;
+        img_route= mokepons_imgs.capipepo;
+
     }else if(rdRatigueya.checked){
         selectedMascot=rdRatigueya.id;
+        img_route= mokepons_imgs.ratigueya;
+
     }else if(rdLangostelvis.checked){
         selectedMascot=rdLangostelvis.id;
+        img_route= mokepons_imgs.langostelvis;
+
     }else if(rdTucapalma.checked){
         selectedMascot=rdTucapalma.id;
+        img_route= mokepons_imgs.tucapalma;
+
     }else if(rdPydos.checked){
         selectedMascot=rdPydos.id;
+        img_route= mokepons_imgs.pydos;
+
     }else{
-        alert("Sie müssen etwas entscheiden")
+        alert("Debe seleccionar algo")
         isSelected=false;
-    }
-    mascotName.innerHTML=selectedMascot;
-    btnSelectMascot.disabled = true;
+    }  
     if(isSelected){
-        selectEnemy(1,6);
+        route_enemy=selectEnemy(1,6);
+        sectionAttack.style.display = "flex";
+        sectionMascots.style.display = "none";
+        enemyName.innerHTML=enemy;
+        mascotName.innerHTML=selectedMascot+" (tú)";
+        btnSelectMascot.disabled = true;
+        divJugador_img.src = img_route;
+        divEnemigo_img.src = route_enemy
+        set_fight_background()
     }
-    sectionAttack.style.display = "flex";
-    sectionMascots.style.display = "none";
-    enemyName.innerHTML=enemy;
+    
 }
 
 function selectEnemy(min,max){ //selects an enemy
     let randomNumber = generate_random(min,max);
     enemy=enemyOptions[randomNumber];
+    return mokepons_imgs[enemy]
 }
 
 function waterAttack(){ //attacks for each type 
@@ -116,18 +180,18 @@ function selectEnemyAttack(){ // selects and attack for the enemy
 function combatResult(){ //evaluates the attacks and gives the output, life deduction
     if(mascotAttack==enemyAttack){
         result="empate";
-    }else if(mascotAttack=="Agua" && enemyAttack=="Fuego"){
+        divMessages.style.border = "4px solid gray"
+    }else if(
+        mascotAttack=="Agua" && enemyAttack=="Fuego" ||
+        mascotAttack=="Fuego" && enemyAttack=="Tierra" ||
+        mascotAttack=="Tierra" && enemyAttack=="Agua"){
         result ="Ganaste 🎉"
         enemyLives-- 
-    }else if(mascotAttack=="Fuego" && enemyAttack=="Tierra"){
-        result ="Ganaste 🎉" 
-        enemyLives--
-    }else if(mascotAttack=="Tierra" && enemyAttack=="Agua"){
-        result ="Ganaste 🎉"
-        enemyLives-- 
+        divMessages.style.border = "4px solid #50CA4A"
     }else{
         result="perdiste 😭"
         mascotLives--;
+        divMessages.style.border = "4px solid #F32915"
     }
     mascotL.innerHTML=mascotLives;
     enemyL.innerHTML=enemyLives;
@@ -138,8 +202,8 @@ function combatResult(){ //evaluates the attacks and gives the output, life dedu
 function createMessage(){ //creates a message after each attack
 
     sectionMessages.innerHTML=result;
-    ataqueJugador.innerHTML="Tu mascota atacó con "+mascotAttack;
-    ataqueEnemigo.innerHTML= "La mascota enemiga atacó con "+enemyAttack;
+    ataqueJugador.innerHTML="Atacaste con "+mascotAttack;
+    ataqueEnemigo.innerHTML= "El enemigo atacó con "+enemyAttack;
 
 }
 
