@@ -1,3 +1,32 @@
+const btnReload = document.getElementById("btnReload"); //button to reload the page
+const btnFire = document.getElementById("btnFire");
+const btnWater = document.getElementById("btnWater");
+const btnEarth = document.getElementById("btnEarth");
+
+const rdHipodoge = document.getElementById("hipodoge"); //radio selectors for the mascot
+const rdCapipepo = document.getElementById("capipepo");
+const rdRatigueya = document.getElementById("ratigueya");
+const rdLangostelvis = document.getElementById("langostelvis");
+const rdTucapalma = document.getElementById("tucapalma");
+const rdPydos = document.getElementById("pydos");
+
+
+const mascotName = document.getElementById("mascotName");
+const enemyName = document.getElementById("enemyName");
+
+const sectionMessages = document.getElementById("resultado")
+const ataqueJugador = document.getElementById("ataqueJugador")
+const ataqueEnemigo = document.getElementById("ataqueEnemigo")
+const botonAtaque = document.getElementById("botonAtaque")
+
+const sectionAttack = document.getElementById("attackSelect");
+const sectionMascots = document.getElementById("mascotSelect");
+const mascotL = document.getElementById("mascotLives");
+const enemyL = document.getElementById("enemyLives");
+const divMessages = document.getElementById("messages");
+const divJugador_img = document.getElementById("jugador_imagen")
+const divEnemigo_img = document.getElementById("enemigo_imagen")
+
 let selectedMascot; //the name of the mascot of the player
 let enemy; //the name of the mascot of the enemy
 let mascotAttack;// The attack the player has chosen
@@ -7,46 +36,45 @@ let result; //The result of each round; victory or defeat
 let mascotLives=3; // Lives of the player
 let enemyLives=3; // Lives of the enemy
 
-let attackOptions={ 1:"Fuego", // All possible attacks that can be made
-                    2:"Agua",
-                    3:"Tierra"}
-
-let btnSelectMascot = document.getElementById("btnSelectMascot"); //button to select the mascot
-let btnReload = document.getElementById("btnReload"); //button to reload the page
-let btnFire = document.getElementById("btnFire");
-let btnWater = document.getElementById("btnWater");
-let btnEarth = document.getElementById("btnEarth");
-
-let rdHipodoge = document.getElementById("hipodoge"); //radio selectors for the mascot
-let rdCapipepo = document.getElementById("capipepo");
-let rdRatigueya = document.getElementById("ratigueya");
-let rdLangostelvis = document.getElementById("langostelvis");
-let rdTucapalma = document.getElementById("tucapalma");
-let rdPydos = document.getElementById("pydos");
-let enemyOptions={  // All possible mascots the player can select
+const btnSelectMascot = document.getElementById("btnSelectMascot"); //button to select the mascot
+const enemyOptions={  // All possible mascots the player can select
     1:rdHipodoge.id,
     2:rdCapipepo.id,
     3:rdRatigueya.id,
     4:rdLangostelvis.id,
     5:rdTucapalma.id,
-    6:rdPydos.id}
+    6:rdPydos.id
+}
 
-let mascotName = document.getElementById("mascotName");
-let enemyName = document.getElementById("enemyName");
+const attackOptions={ 
+    1:"Fuego", // All possible attacks that can be made
+    2:"Agua",
+    3:"Tierra"
+}
 
-let sectionMessages = document.getElementById("resultado")
-let ataqueJugador = document.getElementById("ataqueJugador")
-let ataqueEnemigo = document.getElementById("ataqueEnemigo")
-let botonAtaque = document.getElementById("botonAtaque")
+const mokepons_imgs = {
+    capipepo:"assets/capipepo.jpg",
+    hipodoge:"assets/hipodoge.jpg",
+    langostelvis:"assets/langostelvis.jpg",
+    pydos:"assets/pydos.jpeg",
+    ratigueya:"assets/ratigueya.jpeg",
+    tucapalma:"assets/tucapalma.jpg"
+}
 
-let sectionAttack = document.getElementById("attackSelect");
-let sectionMascots = document.getElementById("mascotSelect");
-let mascotL = document.getElementById("mascotLives");
-let enemyL = document.getElementById("enemyLives");
-let divMessages = document.getElementById("messages");
-let divJugador_img = document.getElementById("jugador_imagen")
-let divEnemigo_img = document.getElementById("enemigo_imagen")
+const selection_backgrounds = [
 
+    "assets/background_select/forest_day.webp",
+    "assets/background_select/forest_noon.jpg",
+    "assets/background_select/forest-midday.jpeg",
+    "assets/background_select/forest-night.jpg",
+    "assets/background_select/street-noon.jpeg",
+]
+const fight_backgrounds = [
+    "assets/background_fight/fight1.webp",
+    "assets/background_fight/fight2.webp",
+    "assets/background_fight/fight3.webp",
+    "assets/background_fight/fight4.jpg"
+]
 
 
 //assign events for buttons and whatnot ++++++++++++
@@ -56,37 +84,24 @@ btnWater.addEventListener("click",waterAttack);
 btnFire.addEventListener("click",fireAttack);
 btnReload.addEventListener("click",doLoad)
 
-selection_backgrounds = [
 
-    "assets/background_select/forest_day.webp",
-    "assets/background_select/forest_noon.jpg",
-    "assets/background_select/forest-midday.jpeg",
-    "assets/background_select/forest-night.jpg",
-    "assets/background_select/street-noon.jpeg",
-]
 
 function set_selection_background(){
     randomIndex = generate_random(0,4)
     selected_image = selection_backgrounds[randomIndex]
     sectionMascots.style.backgroundImage = "url(\"" + selected_image + "\")";
-
 }
 
-window.onload = function (){
-    set_selection_background()
 
-}
-fight_backgrounds = [
-    "assets/background_fight/fight1.webp",
-    "assets/background_fight/fight2.webp",
-    "assets/background_fight/fight3.webp",
-    "assets/background_fight/fight4.jpg"
-]
 
 function set_fight_background(){
     randomIndex = generate_random(0,3)
     selected_image = fight_backgrounds[randomIndex]
     sectionAttack.style.backgroundImage = "url(\"" + selected_image + "\")";
+}
+
+window.onload = function (){
+    set_selection_background()
 }
 
 
@@ -95,14 +110,7 @@ enemyL.innerHTML=enemyLives;
 sectionAttack.style.display = "none";
 btnReload.style.display="none";
 
-mokepons_imgs = {
-    capipepo:"assets/capipepo.jpg",
-    hipodoge:"assets/hipodoge.jpg",
-    langostelvis:"assets/langostelvis.jpg",
-    pydos:"assets/pydos.jpeg",
-    ratigueya:"assets/ratigueya.jpeg",
-    tucapalma:"assets/tucapalma.jpg"
-}
+
 
 function selectMascots(){ //let's player select, and selects for the enemy
     var isSelected=true;
