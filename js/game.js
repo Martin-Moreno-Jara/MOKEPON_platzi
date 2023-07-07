@@ -1,3 +1,4 @@
+
 const btnReload = document.getElementById("btnReload"); //button to reload the page
 const btnFire = document.getElementById("btnFire");
 const btnWater = document.getElementById("btnWater");
@@ -76,6 +77,18 @@ const fight_backgrounds = [
     "assets/background_fight/fight4.jpg"
 ]
 
+var mokepon_hipodoge = new Mokepon("hipodoge",mokepons_imgs.hipodoge,3,"agua");
+var mokepon_capipepo = new Mokepon("capipepo",mokepons_imgs.capipepo,3,"tierra");
+var mokepon_ratigueya = new Mokepon("ratigueya",mokepons_imgs.ratigueya,3,"fuego");
+var mokepon_langostelvis = new Mokepon("langostelvis",mokepons_imgs.langostelvis,3,"agua");
+var mokepon_tucapalma = new Mokepon("tucapalma",mokepons_imgs.tucapalma,3,"viento");
+var mokepon_pydos = new Mokepon("pydos",mokepons_imgs.pydos,3,"rayo");
+
+let mokepon_array = []
+
+mokepon_array.push(mokepon_hipodoge,mokepon_capipepo,mokepon_ratigueya,mokepon_langostelvis,mokepon_tucapalma,mokepon_pydos)
+
+console.log(mokepon_array)
 
 //assign events for buttons and whatnot ++++++++++++
 btnSelectMascot.addEventListener("click",selectMascots)
