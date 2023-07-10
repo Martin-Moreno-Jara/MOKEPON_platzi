@@ -88,14 +88,26 @@ let mokepon_array = []
 
 mokepon_array.push(mokepon_hipodoge,mokepon_capipepo,mokepon_ratigueya,mokepon_langostelvis,mokepon_tucapalma,mokepon_pydos)
 
-console.log(mokepon_array)
+function iniciarJuego(){
+    mascotL.innerHTML=mascotLives; //Initialy assing lives to both player and enemy
+    enemyL.innerHTML=enemyLives;
+    sectionAttack.style.display = "none";
+    btnReload.style.display="none";
+    cargar_tarjetas();
 
-//assign events for buttons and whatnot ++++++++++++
-btnSelectMascot.addEventListener("click",selectMascots)
-btnEarth.addEventListener("click",earthAttack);
-btnWater.addEventListener("click",waterAttack);
-btnFire.addEventListener("click",fireAttack);
-btnReload.addEventListener("click",doLoad)
+    //assign events for buttons and whatnot ++++++++++++
+    btnSelectMascot.addEventListener("click",selectMascots)
+    btnEarth.addEventListener("click",earthAttack);
+    btnWater.addEventListener("click",waterAttack);
+    btnFire.addEventListener("click",fireAttack);
+    btnReload.addEventListener("click",doLoad)
+    }
+
+function cargar_tarjetas(){
+    mokepon_array.forEach((mokepon)=>{
+        console.log(mokepon.nombre)
+    });
+}
 
 
 
@@ -118,10 +130,7 @@ window.onload = function (){
 }
 
 
-mascotL.innerHTML=mascotLives; //Initialy assing lives to both player and enemy
-enemyL.innerHTML=enemyLives;
-sectionAttack.style.display = "none";
-btnReload.style.display="none";
+
 
 
 
@@ -255,4 +264,5 @@ function generate_random(min,max){//generates a random number
     return Math.floor(Math.random()*(max-min+1))+min;
 }
 
+iniciarJuego()
 
