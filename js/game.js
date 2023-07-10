@@ -31,28 +31,11 @@ let mascotLives=3; // Lives of the player
 let enemyLives=3; // Lives of the enemy
 
 const btnSelectMascot = document.getElementById("btnSelectMascot"); //button to select the mascot
-const enemyOptions={  // All possible mascots the player can select
-    1:"hipodoge",
-    2:"capipepo",
-    3:"ratigueya",
-    4:"langostelvis",
-    5:"tucapalma",
-    6:"pydos"
-}
 
 const attackOptions={ 
     1:"Fuego", // All possible attacks that can be made
     2:"Agua",
     3:"Tierra"
-}
-
-const mokepons_imgs = {
-    capipepo:"assets/capipepo.jpg",
-    hipodoge:"assets/hipodoge.jpg",
-    langostelvis:"assets/langostelvis.jpg",
-    pydos:"assets/pydos.jpeg",
-    ratigueya:"assets/ratigueya.jpeg",
-    tucapalma:"assets/tucapalma.jpg"
 }
 
 const selection_backgrounds = [
@@ -77,12 +60,12 @@ let rdLangostelvis
 let rdTucapalma 
 let rdPydos 
 
-var mokepon_hipodoge = new Mokepon("hipodoge",mokepons_imgs.hipodoge,3,"agua");
-var mokepon_capipepo = new Mokepon("capipepo",mokepons_imgs.capipepo,3,"tierra");
-var mokepon_ratigueya = new Mokepon("ratigueya",mokepons_imgs.ratigueya,3,"fuego");
-var mokepon_langostelvis = new Mokepon("langostelvis",mokepons_imgs.langostelvis,3,"agua");
-var mokepon_tucapalma = new Mokepon("tucapalma",mokepons_imgs.tucapalma,3,"viento");
-var mokepon_pydos = new Mokepon("pydos",mokepons_imgs.pydos,3,"rayo");
+var mokepon_hipodoge = new Mokepon("hipodoge","assets/hipodoge.jpg",3,"agua");
+var mokepon_capipepo = new Mokepon("capipepo","assets/capipepo.jpg",3,"tierra");
+var mokepon_ratigueya = new Mokepon("ratigueya","assets/ratigueya.jpeg",3,"fuego");
+var mokepon_langostelvis = new Mokepon("langostelvis","assets/langostelvis.jpg",3,"agua");
+var mokepon_tucapalma = new Mokepon("tucapalma","assets/tucapalma.jpg",3,"viento");
+var mokepon_pydos = new Mokepon("pydos","assets/pydos.jpeg",3,"rayo");
 
 let mokepon_array = []
 
@@ -120,7 +103,6 @@ function cargar_tarjetas(){
          rdLangostelvis=document.getElementById("langostelvis");
          rdTucapalma=document.getElementById("tucapalma"); 
          rdPydos=document.getElementById("pydos"); 
-         console.log(rdHipodoge)
     });
 }
 
@@ -144,11 +126,6 @@ window.onload = function (){
     set_selection_background()
 }
 
-
-
-
-
-
 function selectMascots(){ //let's player select, and selects for the enemy
     var isSelected=true;
     selectedMascot="";
@@ -156,41 +133,41 @@ function selectMascots(){ //let's player select, and selects for the enemy
     img_route="";
     if(rdHipodoge.checked){
         selectedMascot=rdHipodoge.id;
-        img_route= mokepons_imgs.hipodoge;
+        img_route= mokepon_hipodoge.imagen;
 
     }else if(rdCapipepo.checked){
         selectedMascot=rdCapipepo.id;
-        img_route= mokepons_imgs.capipepo;
+        img_route= mokepon_capipepo.imagen;
 
     }else if(rdRatigueya.checked){
         selectedMascot=rdRatigueya.id;
-        img_route= mokepons_imgs.ratigueya;
+        img_route= mokepon_ratigueya.imagen;
 
     }else if(rdLangostelvis.checked){
         selectedMascot=rdLangostelvis.id;
-        img_route= mokepons_imgs.langostelvis;
+        img_route= mokepon_langostelvis.imagen;
 
     }else if(rdTucapalma.checked){
         selectedMascot=rdTucapalma.id;
-        img_route= mokepons_imgs.tucapalma;
+        img_route= mokepon_tucapalma.imagen;
 
     }else if(rdPydos.checked){
         selectedMascot=rdPydos.id;
-        img_route= mokepons_imgs.pydos;
+        img_route= mokepon_pydos.imagen;
 
     }else{
         alert("Debe seleccionar algo")
         isSelected=false;
     }  
     if(isSelected){
-        route_enemy=selectEnemy(1,6);
+        enemy=selectEnemy(1,6);
         sectionAttack.style.display = "flex";
         sectionMascots.style.display = "none";
-        enemyName.innerHTML=enemy;
+        enemyName.innerHTML=enemy.nombre;
         mascotName.innerHTML=selectedMascot+" (tú)";
         btnSelectMascot.disabled = true;
         divJugador_img.src = img_route;
-        divEnemigo_img.src = route_enemy
+        divEnemigo_img.src = enemy.imagen
         set_fight_background()
     }
     
@@ -198,8 +175,8 @@ function selectMascots(){ //let's player select, and selects for the enemy
 
 function selectEnemy(min,max){ //selects an enemy
     let randomNumber = generate_random(min,max);
-    enemy=enemyOptions[randomNumber];
-    return mokepons_imgs[enemy]
+    enemy=mokepon_array[randomNumber];
+    return enemy;
 }
 
 function waterAttack(){ //attacks for each type 
