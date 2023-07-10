@@ -4,14 +4,6 @@ const btnFire = document.getElementById("btnFire");
 const btnWater = document.getElementById("btnWater");
 const btnEarth = document.getElementById("btnEarth");
 
-const rdHipodoge = document.getElementById("hipodoge"); //radio selectors for the mascot
-const rdCapipepo = document.getElementById("capipepo");
-const rdRatigueya = document.getElementById("ratigueya");
-const rdLangostelvis = document.getElementById("langostelvis");
-const rdTucapalma = document.getElementById("tucapalma");
-const rdPydos = document.getElementById("pydos");
-
-
 const mascotName = document.getElementById("mascotName");
 const enemyName = document.getElementById("enemyName");
 
@@ -78,6 +70,13 @@ const fight_backgrounds = [
     "assets/background_fight/fight4.jpg"
 ]
 
+let rdHipodoge
+let rdCapipepo 
+let rdRatigueya 
+let rdLangostelvis
+let rdTucapalma 
+let rdPydos 
+
 var mokepon_hipodoge = new Mokepon("hipodoge",mokepons_imgs.hipodoge,3,"agua");
 var mokepon_capipepo = new Mokepon("capipepo",mokepons_imgs.capipepo,3,"tierra");
 var mokepon_ratigueya = new Mokepon("ratigueya",mokepons_imgs.ratigueya,3,"fuego");
@@ -106,13 +105,22 @@ function iniciarJuego(){
 
 function cargar_tarjetas(){
     mokepon_array.forEach((mokepon)=>{
-        mokepon_tarjeta = `<input type="radio" name="mascot" id=${mokepon.nombre}/>
+        mokepon_tarjeta = `<input type="radio" name="mascot" id=${mokepon.nombre}>
         <label class="mokeponCard" for=${mokepon.nombre}>
             <p>${mokepon.nombre}</p>
-            <img src=${mokepon.imagen} alt=${mokepon.nombre}/>
+            <img src=${mokepon.imagen} alt=${mokepon.nombre}>
         </label> `
-
+        
+        console.log(mokepon.nombre)
         divTarjetas.innerHTML += mokepon_tarjeta;
+
+         rdHipodoge= document.getElementById("hipodoge");
+         rdCapipepo= document.getElementById("capipepo"); 
+         rdRatigueya=document.getElementById("ratigueya"); 
+         rdLangostelvis=document.getElementById("langostelvis");
+         rdTucapalma=document.getElementById("tucapalma"); 
+         rdPydos=document.getElementById("pydos"); 
+         console.log(rdHipodoge)
     });
 }
 
