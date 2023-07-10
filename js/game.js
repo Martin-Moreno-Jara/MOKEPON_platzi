@@ -25,8 +25,9 @@ const sectionMascots = document.getElementById("mascotSelect");
 const mascotL = document.getElementById("mascotLives");
 const enemyL = document.getElementById("enemyLives");
 const divMessages = document.getElementById("messages");
-const divJugador_img = document.getElementById("jugador_imagen")
-const divEnemigo_img = document.getElementById("enemigo_imagen")
+const divJugador_img = document.getElementById("jugador_imagen");
+const divEnemigo_img = document.getElementById("enemigo_imagen");
+const divTarjetas = document.getElementById("div_tarjetas_mokepon");
 
 let selectedMascot; //the name of the mascot of the player
 let enemy; //the name of the mascot of the enemy
@@ -39,12 +40,12 @@ let enemyLives=3; // Lives of the enemy
 
 const btnSelectMascot = document.getElementById("btnSelectMascot"); //button to select the mascot
 const enemyOptions={  // All possible mascots the player can select
-    1:rdHipodoge.id,
-    2:rdCapipepo.id,
-    3:rdRatigueya.id,
-    4:rdLangostelvis.id,
-    5:rdTucapalma.id,
-    6:rdPydos.id
+    1:"hipodoge",
+    2:"capipepo",
+    3:"ratigueya",
+    4:"langostelvis",
+    5:"tucapalma",
+    6:"pydos"
 }
 
 const attackOptions={ 
@@ -105,7 +106,13 @@ function iniciarJuego(){
 
 function cargar_tarjetas(){
     mokepon_array.forEach((mokepon)=>{
-        console.log(mokepon.nombre)
+        mokepon_tarjeta = `<input type="radio" name="mascot" id=${mokepon.nombre}/>
+        <label class="mokeponCard" for=${mokepon.nombre}>
+            <p>${mokepon.nombre}</p>
+            <img src=${mokepon.imagen} alt=${mokepon.nombre}/>
+        </label> `
+
+        divTarjetas.innerHTML += mokepon_tarjeta;
     });
 }
 
