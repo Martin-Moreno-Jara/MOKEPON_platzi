@@ -26,15 +26,18 @@
         </p>
     </section>
 
+    <section id="vista-mapa">
+        <h1 class="main-subtitulo">Recorre el mapa</h1>
+        <canvas id="mapa"></canvas>
+
+    </section>
+
     <section id="attackSelect">
 
         <h2 class="main-subtitulo">Elige tu ataque</h2>
-        <div class="tarjetasAtaques">
-            <button id="btnFire" class="botonAtaque">Fuego <br>🔥</button>
-            <button id="btnWater" class="botonAtaque">Agua <br>💧</button>
-            <button id="btnEarth" class="botonAtaque">Tierra <br>🌍</button>
+        <div id="div_tarjetas_ataques" class="tarjetasAtaques">
+            
         </div>
-
             <div id="messages">
                 <p id="resultado" class="normal-text">Ataca para empezar</p>
                 
@@ -43,20 +46,19 @@
                 </section>
             </div>
 
-
             <div class="ataquePadre">
                 <div class="ataqueJugador">
                     <span id="mascotName"></span>
                     <div >
-                        <img src="assets/capipepo.jpg" class="imagen" id="jugador_imagen">
+                        <img class="imagen" id="jugador_imagen">
                     </div>
                     <span id="mascotLives"></span>
                     <p id="ataqueJugador"></p>
-                </div>
+            </div>
                 <div class="ataqueEnemigo">
                     <span id="enemyName"></span>
                     <div>
-                        <img src="assets/capipepo.jpg" class="imagen" id="enemigo_imagen">
+                        <img class="imagen" id="enemigo_imagen">
                     </div>
                     <span id="enemyLives"></span>
                     <p id="ataqueEnemigo"></p>

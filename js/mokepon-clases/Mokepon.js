@@ -4,7 +4,6 @@
         this.nombre = nombre;
         this.imagen= imagen;
         this.vida= vida
-        this.tipo = tipo
         this.ataques = []
     }
 
