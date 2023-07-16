@@ -18,6 +18,9 @@ body{
     align-items: center;
     background-color:hsla(208, 80%, 34%, 0.5);
 }
+.exp{
+    height: 100px;
+}
 .main-titulo{
     color: white;
     font-size: 55px;

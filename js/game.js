@@ -21,6 +21,7 @@ const divAtaques = document.getElementById("div_tarjetas_ataques");
 const section_mapa = document.getElementById("vista-mapa");
 const mapa = document.getElementById("mapa");
 let canvas = mapa.getContext("2d");
+document.addEventListener("keydown",mover_mokepon)
 
 let selectedMascot; //the name of the mascot of the player
 let enemy; //the name of the mascot of the enemy
@@ -45,7 +46,6 @@ const attackOptions={
     4:"Viento",
     5:"Rayo"
 }
-
 const selection_backgrounds = [
 
     "assets/background_select/forest_day.webp",
@@ -181,32 +181,26 @@ function selectMascots(){ //let's player select, and selects for the enemy
         selectedMascot=rdHipodoge.id;
         currentMokepon=mokepon_hipodoge;
         img_route= mokepon_hipodoge.imagen;
-
     }else if(rdCapipepo.checked){
         selectedMascot=rdCapipepo.id;
         currentMokepon=mokepon_capipepo;
         img_route= mokepon_capipepo.imagen;
-
     }else if(rdRatigueya.checked){
         selectedMascot=rdRatigueya.id;
         currentMokepon=mokepon_ratigueya;
         img_route= mokepon_ratigueya.imagen;
-
     }else if(rdLangostelvis.checked){
         selectedMascot=rdLangostelvis.id;
         currentMokepon=mokepon_langostelvis;
         img_route= mokepon_langostelvis.imagen;
-
     }else if(rdTucapalma.checked){
         selectedMascot=rdTucapalma.id;
         currentMokepon=mokepon_tucapalma;
         img_route= mokepon_tucapalma.imagen;
-
     }else if(rdPydos.checked){
         selectedMascot=rdPydos.id;
         currentMokepon=mokepon_pydos;
         img_route= mokepon_pydos.imagen;
-
     }else{
         alert("Debe seleccionar algo")
         isSelected=false;
@@ -216,10 +210,7 @@ function selectMascots(){ //let's player select, and selects for the enemy
         //sectionAttack.style.display = "flex";
         sectionMascots.style.display = "none";
         section_mapa.style.display = "flex"
-        console.log(currentMokepon.imagen)
-        let imagen_canvas = new Image();
-        imagen_canvas.src = currentMokepon.imagen;
-        canvas.drawImage(imagen_canvas,10,10,80,50);
+        poner_mokepon()
         enemyName.innerHTML=enemy.nombre;
         mascotName.innerHTML=selectedMascot+" (tú)";
         btnSelectMascot.disabled = true;
@@ -228,7 +219,24 @@ function selectMascots(){ //let's player select, and selects for the enemy
         set_fight_background()
         cargar_tarjetas_ataque()
     }
-    
+}
+function poner_mokepon(){
+    canvas.clearRect(0,0,mapa.width,mapa.height)
+    canvas.drawImage(currentMokepon.canvasImg,currentMokepon.x,currentMokepon.y,currentMokepon.ancho,currentMokepon.alto);
+}
+
+function mover_mokepon(e){
+
+    if(e.key=="ArrowRight"){
+        currentMokepon.x+=5
+    }if(e.key=="ArrowLeft"){
+        currentMokepon.x-=5
+    }if(e.key=="ArrowUp"){
+        currentMokepon.y-=5
+    }if(e.key=="ArrowDown"){
+        currentMokepon.y+=5
+    }
+    poner_mokepon()
 }
 
 function selectEnemy(min,max){ //selects an enemy
