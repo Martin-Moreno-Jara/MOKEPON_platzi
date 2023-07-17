@@ -33,6 +33,8 @@ let mascotLives=3; // Lives of the player
 let enemyLives=3; // Lives of the enemy
 const btnSelectMascot = document.getElementById("btnSelectMascot"); //button to select the mascot
 
+let background_map = new Image()
+background_map.src = "assets/map/mokemap.png"
 let btnFire;
 let btnWater;
 let btnEarth;
@@ -211,6 +213,8 @@ function selectMascots(){ //let's player select, and selects for the enemy
         sectionMascots.style.display = "none";
         section_mapa.style.display = "flex"
         poner_mokepon()
+        let intevervalo
+        intevervalo = setInterval(poner_mokepon,50)
         enemyName.innerHTML=enemy.nombre;
         mascotName.innerHTML=selectedMascot+" (tú)";
         btnSelectMascot.disabled = true;
@@ -222,7 +226,17 @@ function selectMascots(){ //let's player select, and selects for the enemy
 }
 function poner_mokepon(){
     canvas.clearRect(0,0,mapa.width,mapa.height)
-    canvas.drawImage(currentMokepon.canvasImg,currentMokepon.x,currentMokepon.y,currentMokepon.ancho,currentMokepon.alto);
+    canvas.drawImage(background_map,0,0,mapa.width,mapa.height)
+    currentMokepon.pintarMokepon();
+    poner_enemigos()
+}
+function poner_enemigos(){
+    mokepon_capipepo.pintarMokepon(60,60,35,25);
+    mokepon_hipodoge.pintarMokepon(150,50,35,25);
+    mokepon_langostelvis.pintarMokepon(180,90,35,25);
+    mokepon_pydos.pintarMokepon(250,75,35,25);
+    mokepon_ratigueya.pintarMokepon(5,110,35,25);
+    mokepon_tucapalma.pintarMokepon(100,5,35,25);
 }
 
 function mover_mokepon(e){
