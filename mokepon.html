@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOKEPON</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
@@ -29,6 +29,12 @@
     <section id="vista-mapa">
         <h1 class="main-subtitulo">Recorre el mapa</h1>
         <canvas id="mapa"></canvas>
+            <button class="btnSelect" onmousedown="moverArriba()">Arriba</button>
+        <div id="botones-moverse">
+            <button class="btnSelect" onClick="moverIzquierda()">Izquierda</button>
+            <button class="btnSelect" onClick="moverAbajo()">Abajo</button>
+            <button class="btnSelect" onClick="moverDerecha()">Derecha</button>
+        </div>
 
     </section>
 

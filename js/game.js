@@ -23,8 +23,9 @@ const mapa = document.getElementById("mapa");
 let canvas = mapa.getContext("2d");
 document.addEventListener("keydown",mover_mokepon)
 
+
 let selectedMascot; //the name of the mascot of the player
-let enemy; //the name of the mascot of the enemy
+let selected_enemy; //the name of the mascot of the enemy
 let mascotAttack;// The attack the player has chosen
 let enemyAttack; //The attack the enemy has chosen
 let result; //The result of each round; victory or defeat
@@ -77,12 +78,25 @@ var mokepon_langostelvis = new Mokepon("langostelvis","assets/mokepon_images/lan
 var mokepon_tucapalma = new Mokepon("tucapalma","assets/mokepon_images/tucapalma.png",3);
 var mokepon_pydos = new Mokepon("pydos","assets/mokepon_images/pydos.png",3);
 
-mokepon_hipodoge.ataques.push("agua","tierra","fuego","viento");
-mokepon_capipepo.ataques.push("agua","tierra","fuego");
-mokepon_ratigueya.ataques.push("agua","tierra","fuego","rayo");
-mokepon_langostelvis.ataques.push("agua","tierra","fuego");
-mokepon_tucapalma.ataques.push("agua","tierra","fuego","viento");
-mokepon_pydos.ataques.push("agua","tierra","fuego","viento","rayo");
+var enemigo_hipodoge = new Mokepon("hipodoge","assets/mokepon_images/hipodoge.webp",3,150,50,35,25);
+var enemigo_capipepo = new Mokepon("capipepo","assets/mokepon_images/capipepo.webp",3,60,60,35,25);
+var enemigo_ratigueya = new Mokepon("ratigueya","assets/mokepon_images/ratigueya.png",3,5,110,35,25);
+var enemigo_langostelvis = new Mokepon("langostelvis","assets/mokepon_images/langostelvis.png",3,180,90,35,25);
+var enemigo_tucapalma = new Mokepon("tucapalma","assets/mokepon_images/tucapalma.png",3,100,5,35,25);
+var enemigo_pydos = new Mokepon("pydos","assets/mokepon_images/pydos.png",3,250,75,35,25);
+
+mokepon_hipodoge.ataques.push("Agua","Tierra","Fuego","Viento");
+enemigo_hipodoge.ataques = mokepon_hipodoge.ataques;
+mokepon_capipepo.ataques.push("Agua","Tierra","Fuego");
+enemigo_capipepo.ataques = mokepon_capipepo.ataques;
+mokepon_ratigueya.ataques.push("Agua","Tierra","Fuego","Rayo");
+enemigo_ratigueya.ataques = mokepon_ratigueya.ataques;
+mokepon_langostelvis.ataques.push("Agua","Tierra","Fuego");
+enemigo_langostelvis.ataques = mokepon_langostelvis.ataques;
+mokepon_tucapalma.ataques.push("Agua","Tierra","Fuego","Viento");
+enemigo_tucapalma.ataques = mokepon_tucapalma.ataques;
+mokepon_pydos.ataques.push("Agua","Tierra","Fuego","Viento","Rayo");
+enemigo_pydos.ataques = mokepon_pydos.ataques;
 
 let mokepon_array = []
 
@@ -122,58 +136,50 @@ function cargar_tarjetas_seleccion(){
 function cargar_tarjetas_ataque(){
     currentMokepon.ataques.forEach((ataque)=>{
     let bonton_ataque;
-    if(ataque=="fuego"){
+    if(ataque=="Fuego"){
         bonton_ataque = `<button id="btnFire" class="botonAtaque">Fuego <br>🔥</button>`
-    }else if(ataque=="agua"){
+    }else if(ataque=="Agua"){
         bonton_ataque = `<button id="btnWater" class="botonAtaque">Agua <br>💧</button>`
-    }else if(ataque=="tierra"){
+    }else if(ataque=="Tierra"){
         bonton_ataque = `<button id="btnEarth" class="botonAtaque">Tierra <br>🌍</button>`
-    }else if(ataque=="viento"){
+    }else if(ataque=="Viento"){
         bonton_ataque = `<button id="btnWind" class="botonAtaque">Viento <br>🌪</button>`
-    }else if(ataque=="rayo"){
+    }else if(ataque=="Rayo"){
         bonton_ataque = `<button id="btnLightning" class="botonAtaque">Rayo <br>💡</button>`
     }
     divAtaques.innerHTML +=bonton_ataque;
     }); 
-    if(currentMokepon.ataques.includes("agua")){
+    if(currentMokepon.ataques.includes("Agua")){
         btnWater = document.getElementById("btnWater");
         btnWater.addEventListener("click",waterAttack)
-    }if(currentMokepon.ataques.includes("agua")){
+    }if(currentMokepon.ataques.includes("Agua")){
         btnFire=document.getElementById("btnFire");
         btnFire.addEventListener("click",fireAttack)
-    }if(currentMokepon.ataques.includes("tierra")){
+    }if(currentMokepon.ataques.includes("Tierra")){
         btnEarth=document.getElementById("btnEarth");
         btnEarth.addEventListener("click",earthAttack)
-    }if(currentMokepon.ataques.includes("viento")){
+    }if(currentMokepon.ataques.includes("Viento")){
         btnWind=document.getElementById("btnWind");
         btnWind.addEventListener("click",windAttack)
-    }if(currentMokepon.ataques.includes("rayo")){
+    }if(currentMokepon.ataques.includes("Rayo")){
         btnLightning=document.getElementById("btnLightning");
         btnLightning.addEventListener("click",lightningAttack)
     }
     
 }
-
-
-
 function set_selection_background(){
     randomIndex = generate_random(0,4)
     selected_image = selection_backgrounds[randomIndex]
     sectionMascots.style.backgroundImage = "url(\"" + selected_image + "\")";
 }
-
-
-
 function set_fight_background(){
     randomIndex = generate_random(0,3)
     selected_image = fight_backgrounds[randomIndex]
     sectionAttack.style.backgroundImage = "url(\"" + selected_image + "\")";
 }
-
 window.onload = function (){
     set_selection_background()
 }
-
 function selectMascots(){ //let's player select, and selects for the enemy
     var isSelected=true;
     selectedMascot;
@@ -208,18 +214,13 @@ function selectMascots(){ //let's player select, and selects for the enemy
         isSelected=false;
     }  
     if(isSelected){
-        enemy=selectEnemy(0,mokepon_array.length-1);
-        //sectionAttack.style.display = "flex";
         sectionMascots.style.display = "none";
         section_mapa.style.display = "flex"
         poner_mokepon()
         let intevervalo
         intevervalo = setInterval(poner_mokepon,50)
-        enemyName.innerHTML=enemy.nombre;
-        mascotName.innerHTML=selectedMascot+" (tú)";
         btnSelectMascot.disabled = true;
         divJugador_img.src = img_route;
-        divEnemigo_img.src = enemy.imagen
         set_fight_background()
         cargar_tarjetas_ataque()
     }
@@ -229,28 +230,71 @@ function poner_mokepon(){
     canvas.drawImage(background_map,0,0,mapa.width,mapa.height)
     currentMokepon.pintarMokepon();
     poner_enemigos()
+    revisarColision(enemigo_capipepo);
+    revisarColision(enemigo_hipodoge);
+    revisarColision(enemigo_langostelvis);
+    revisarColision(enemigo_pydos);
+    revisarColision(enemigo_ratigueya);
+    revisarColision(enemigo_tucapalma);
 }
 function poner_enemigos(){
-    mokepon_capipepo.pintarMokepon(60,60,35,25);
-    mokepon_hipodoge.pintarMokepon(150,50,35,25);
-    mokepon_langostelvis.pintarMokepon(180,90,35,25);
-    mokepon_pydos.pintarMokepon(250,75,35,25);
-    mokepon_ratigueya.pintarMokepon(5,110,35,25);
-    mokepon_tucapalma.pintarMokepon(100,5,35,25);
+    enemigo_capipepo.pintarMokepon();
+    enemigo_hipodoge.pintarMokepon();
+    enemigo_langostelvis.pintarMokepon();
+    enemigo_pydos.pintarMokepon();
+    enemigo_ratigueya.pintarMokepon();
+    enemigo_tucapalma.pintarMokepon();
 }
+function revisarColision(enemigo){
+    const enemigo_up = enemigo.y;
+    const enemgio_down = enemigo.y +enemigo.alto;
+    const enemigo_left = enemigo.x;
+    const enemgio_right = enemigo.x +enemigo.ancho;
 
+    const up = currentMokepon.y;
+    const down = currentMokepon.y +currentMokepon.alto;
+    const left = currentMokepon.x;
+    const right = currentMokepon.x +currentMokepon.ancho;
+
+    if(down<enemigo_up ||
+        up>enemgio_down ||
+        left>enemgio_right ||
+        right<enemigo_left){
+            return 
+        }else{
+            selected_enemy = enemigo;
+            sectionAttack.style.display = "flex";
+            section_mapa.style.display = "none"
+            enemyName.innerHTML=selected_enemy.nombre;
+            mascotName.innerHTML=currentMokepon.nombre+" (tú)";
+            divEnemigo_img.src = selected_enemy.imagen
+        } 
+}
 function mover_mokepon(e){
-
-    if(e.key=="ArrowRight"){
-        currentMokepon.x+=5
-    }if(e.key=="ArrowLeft"){
-        currentMokepon.x-=5
-    }if(e.key=="ArrowUp"){
-        currentMokepon.y-=5
-    }if(e.key=="ArrowDown"){
-        currentMokepon.y+=5
+    if(section_mapa.style.display!="none"){
+        if(e.key=="ArrowRight"){
+            currentMokepon.x+=5
+        }if(e.key=="ArrowLeft"){
+            currentMokepon.x-=5
+        }if(e.key=="ArrowUp"){
+            currentMokepon.y-=5
+        }if(e.key=="ArrowDown"){
+            currentMokepon.y+=5
+        }
+        poner_mokepon()
     }
-    poner_mokepon()
+}
+function moverArriba(){
+    currentMokepon.y-=5
+}
+function moverAbajo(){
+    currentMokepon.y+=5
+}
+function moverIzquierda(){
+    currentMokepon.x-=5
+}
+function moverDerecha(){
+    currentMokepon.x+=5
 }
 
 function selectEnemy(min,max){ //selects an enemy
@@ -258,7 +302,6 @@ function selectEnemy(min,max){ //selects an enemy
     enemy=mokepon_array[randomNumber];
     return enemy;
 }
-
 function waterAttack(){ //attacks for each type 
     mascotAttack=attackOptions[2];
     selectEnemyAttack();
@@ -285,8 +328,8 @@ function lightningAttack(){
     combatResult();
 }
 function selectEnemyAttack(){ // selects and attack for the enemy
-    var number = generate_random(0,enemy.ataques.length-1);
-    enemyAttack=enemy.ataques[number] 
+    var number = generate_random(0,selected_enemy.ataques.length-1);
+    enemyAttack=selected_enemy.ataques[number] 
 }
 
 function combatResult(){ //evaluates the attacks and gives the output, life deduction
@@ -343,9 +386,9 @@ function blockButtons(){ //blocks attack buttons
     btnFire.disabled=true;
     btnEarth.disabled=true;
     btnWater.disabled=true;
-    if(currentMokepon.ataques.includes("viento")){
+    if(currentMokepon.ataques.includes("Viento")){
         btnWind.disabled=true;
-    }if(currentMokepon.ataques.includes("rayo")){
+    }if(currentMokepon.ataques.includes("Rayo")){
         btnLightning.disabled=true;
     }
     
