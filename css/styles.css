@@ -18,6 +18,11 @@ body{
     align-items: center;
     background-color:hsla(208, 80%, 34%, 0.5);
 }
+.exp{
+    font-size: smaller;
+    height: 80px;
+
+}
 .main-titulo{
     color: white;
     font-size: 55px;
@@ -92,6 +97,7 @@ gap: 20px;
     height: 150px;
 }
 .btnSelect{
+
     width: 180px;
     height: 40px;
     font-family: 'Press Start 2P';
@@ -204,10 +210,72 @@ input:hover + label {
 #btnEarth:hover{
     border: 4px solid rgb(126, 67, 52);
 }
+#btnWind:hover{
+    border: 4px solid rgb(202, 193, 191);
+}
+#btnLightning:hover{
+    border: 4px solid rgb(227, 236, 49);
+}
+.btnSelect:hover{
+    border: 4px solid black
+
+}
+
+#vista-mapa{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2db8ea;
+}
+#mapa{
+    border: 3px solid black;
+    margin-bottom: 40px;
+    height: 480px;
+    width:700px;
+    border-radius: 10px;
+    background-color: #66839b;
+}
 
 @media (max-width:800px){
     .tarjetas,.tarjetasAtaques{
         flex-direction: column;
+        justify-content: center;
     }
-    
+    .main-subtitulo{
+        text-align: center;
+    }
+    .main-titulo{
+        font-size: 10;
+    }
+    #botones-moverse{
+        display: flex;
+        flex-direction: column;
+    }
+    .ataquePadre{
+        width: 400px;
+        height: 280px;
+    }
+    .ataqueJugador{
+        height: 200px;
+        width: 150px;
+    }
+    .ataqueEnemigo{
+        height: 200px;
+        width: 150px;
+    }
+    .imagen{
+        width: 150px;
+        height: 100px;
+    }
+    body{
+        font-size: 10px;
+    }
+}
+@media(max-width:680px){
+    #mapa{
+        height: 150px;
+        width:300px;
+    }
 }

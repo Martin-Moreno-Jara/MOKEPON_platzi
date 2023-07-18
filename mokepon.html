@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOKEPON</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
@@ -17,43 +17,8 @@
 
         <h2 class="main-subtitulo">Elige tu mascota</h2>
 
-        <div class="tarjetas">
-            <!-- Hipodoge-->
-            <input type="radio" name="mascot" id="hipodoge"/>
-            <label class="mokeponCard" for="hipodoge">
-                <p>Hipodoge</p>
-                <img src="./assets/hipodoge.jpg" alt="Hipodoge"/>
-            </label> <br>
-            <!-- Capipepo-->
-            <input type="radio" name="mascot" id="capipepo"/> 
-            <label class="mokeponCard" for="capipepo">
-                <p>Capipepo</p>
-                <img src="./assets/capipepo.jpg" alt="Capipepo"/>
-            </label> <br>
-            <!-- Ratigueya-->
-            <input type="radio" name="mascot" id="ratigueya"/>
-             <label class="mokeponCard" for="ratigueya">
-                <p>Ratigueya</p>
-                <img src="./assets/ratigueya.jpeg" alt="Capipepo"/>
-             </label> <br>
-            <!-- langostelvis-->
-            <input type="radio" name="mascot" id="langostelvis"/>
-            <label class="mokeponCard" for="langostelvis">
-                <p>Langostelvis</p>
-                <img src="./assets/langostelvis.jpg" alt="Capipepo"/>
-            </label> <br>
-            <!-- Tucapalma-->
-            <input type="radio" name="mascot" id="tucapalma"/>
-            <label class="mokeponCard" for="tucapalma">
-                <p>Tucapalma</p>
-                <img src="./assets/tucapalma.jpg" alt="Capipepo"/>
-            </label> <br>
-            <!-- Pydos-->
-            <input type="radio" name="mascot" id="pydos"/>
-            <label class="mokeponCard" for="pydos" id="label-pydos">
-                <p>Pydos</p>
-                <img src="./assets/pydos.jpeg" alt="Capipepo"/>
-            </label> <br>  
+        <div id="div_tarjetas_mokepon" class="tarjetas">
+            
         </div>
 
         <p>
@@ -61,15 +26,24 @@
         </p>
     </section>
 
+    <section id="vista-mapa">
+        <h1 class="main-subtitulo">Recorre el mapa</h1>
+        <canvas id="mapa"></canvas>
+            <button class="btnSelect" onmousedown="moverArriba()">Arriba</button>
+        <div id="botones-moverse">
+            <button class="btnSelect" onClick="moverIzquierda()">Izquierda</button>
+            <button class="btnSelect" onClick="moverAbajo()">Abajo</button>
+            <button class="btnSelect" onClick="moverDerecha()">Derecha</button>
+        </div>
+
+    </section>
+
     <section id="attackSelect">
 
         <h2 class="main-subtitulo">Elige tu ataque</h2>
-        <div class="tarjetasAtaques">
-            <button id="btnFire" class="botonAtaque">Fuego <br>🔥</button>
-            <button id="btnWater" class="botonAtaque">Agua <br>💧</button>
-            <button id="btnEarth" class="botonAtaque">Tierra <br>🌍</button>
+        <div id="div_tarjetas_ataques" class="tarjetasAtaques">
+            
         </div>
-
             <div id="messages">
                 <p id="resultado" class="normal-text">Ataca para empezar</p>
                 
@@ -78,20 +52,19 @@
                 </section>
             </div>
 
-
             <div class="ataquePadre">
                 <div class="ataqueJugador">
                     <span id="mascotName"></span>
                     <div >
-                        <img src="assets/capipepo.jpg" class="imagen" id="jugador_imagen">
+                        <img class="imagen" id="jugador_imagen">
                     </div>
                     <span id="mascotLives"></span>
                     <p id="ataqueJugador"></p>
-                </div>
+            </div>
                 <div class="ataqueEnemigo">
                     <span id="enemyName"></span>
                     <div>
-                        <img src="assets/capipepo.jpg" class="imagen" id="enemigo_imagen">
+                        <img class="imagen" id="enemigo_imagen">
                     </div>
                     <span id="enemyLives"></span>
                     <p id="ataqueEnemigo"></p>
@@ -100,12 +73,13 @@
         </div>
         
     </section>
-    <footer class="head-foot">
+    <footer class="head-foot exp">
         <div class="normal-text">
             <p>Martin Moreno Jara</p>
             <p>2023 derechos reservados</p>
         </div>
     </footer>
-    <script src="./js/mokepon.js"></script>
+    <script src="./js/mokepon-clases/Mokepon.js"></script>
+    <script src="./js/game.js"></script>>
 </body>
 </html>
