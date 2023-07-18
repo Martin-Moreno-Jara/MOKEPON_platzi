@@ -1,0 +1,19 @@
+{
+  "name": "mokepon",
+  "version": "1.0.0",
+  "description": "Mokepon project for HMTL and Javascript learning with Platzi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Martin-Moreno-Jara/MOKEPON_platzi.git"
+  },
+  "author": "Martin Moreno Jara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Martin-Moreno-Jara/MOKEPON_platzi/issues"
+  },
+  "homepage": "https://github.com/Martin-Moreno-Jara/MOKEPON_platzi#readme"
+}
