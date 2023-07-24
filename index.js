@@ -4,7 +4,11 @@ const port = 8000;
 const cors = require('cors')
 const Jugador = require("./jugador.js");
 const lista_jugadores = []
-
+class Mokepon{
+    constructor(nombre){
+        this.nombre=nombre
+    }
+}
 app.use(cors())
 app.use(express.json())
 
@@ -18,10 +22,17 @@ app.get("/join",(request,response)=>{
     //response.setHeader("Access-Control-Allow-Origin","*")
     response.send(jugador_id)
 })
-app.post("/mokepon/:jugadorId",(req,res)=>{
-    const jugadorId = req.params.jugadorId || "tumama"
+app.post("/mokepon/:jugador_id",(req,res)=>{
+    const jugador_id = req.params.jugador_id || "tumama"
+    const moke_nombre = req.body.mokepon || "null";
+    const mokepon = new Mokepon(moke_nombre);
+    let jugador_index = lista_jugadores.findIndex((jugador_id)=>jugador_id === jugador_id)
+    if(jugador_index>=0){
+        lista_jugadores[jugador_index].asignarMokepon(mokepon);
+    }else{console.group("No asignado")}
     console.log(lista_jugadores)
-    console.log(jugadorId)
+    console.log(jugador_id)
+    //console.log(lista_jugadores[jugador_index].mokepon)
     res.end();
 })
 

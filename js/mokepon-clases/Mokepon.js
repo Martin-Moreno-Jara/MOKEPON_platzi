@@ -2,9 +2,9 @@
 
     constructor(nombre,imagen,vida,x=20,y=5,ancho=60,alto=35){
         this.nombre = nombre;
-        this.imagen= imagen;
-        this.vida= vida
-        this.ataques = []
+        this.imagen= imagen || null;
+        this.vida= vida || null;
+        this.ataques = [] 
         this.canvasImg = new Image()
         this.canvasImg.src = this.imagen
         this.x=x

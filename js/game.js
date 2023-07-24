@@ -29,6 +29,7 @@ let selected_enemy; //the name of the mascot of the enemy
 let mascotAttack;// The attack the player has chosen
 let enemyAttack; //The attack the enemy has chosen
 let result; //The result of each round; victory or defeat
+let jugador_id
 
 let mascotLives=3; // Lives of the player
 let enemyLives=3; // Lives of the enemy
@@ -207,7 +208,7 @@ function selectMascots(){ //let's player select, and selects for the enemy
         isSelected=false;
     }  
     if(isSelected){
-        enviarMokepon(currentMokepon)
+        enviarMokepon(currentMokepon); //enviar a back
         sectionMascots.style.display = "none";
         section_mapa.style.display = "flex"
         poner_mokepon()
@@ -219,9 +220,20 @@ function selectMascots(){ //let's player select, and selects for the enemy
         cargar_tarjetas_ataque()
     }
 }
-function enviarMokepon(){
-
+function enviarMokepon(mascotaActual){
+    const nombre = mascotaActual.nombre
+    fetch(`http://localhost:8000/mokepon/${jugador_id}`,
+    {   method:"post",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            mokepon:nombre
+        })
+    }
+    )
 }
+
 function poner_mokepon(){
     canvas.clearRect(0,0,mapa.width,mapa.height)
     canvas.drawImage(background_map,0,0,mapa.width,mapa.height)
@@ -395,7 +407,8 @@ function getPlayerId(){
     fetch("http://localhost:8000/join").then((res)=>{
             if(res.ok){
                 res.text().then((respuesta)=>{
-                        console.log(respuesta)
+                        jugador_id=respuesta
+                        console.log(jugador_id)
                     })
             }
         })
