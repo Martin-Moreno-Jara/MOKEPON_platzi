@@ -103,6 +103,7 @@ let mokepon_array = []
 mokepon_array.push(mokepon_hipodoge,mokepon_capipepo,mokepon_ratigueya,mokepon_langostelvis,mokepon_tucapalma,mokepon_pydos)
 
 function iniciarJuego(){
+    getPlayerId()
     mascotL.innerHTML=mascotLives; //Initialy assing lives to both player and enemy
     enemyL.innerHTML=enemyLives;
     sectionAttack.style.display = "none";
@@ -183,47 +184,43 @@ window.onload = function (){
 function selectMascots(){ //let's player select, and selects for the enemy
     var isSelected=true;
     selectedMascot;
-    enemy="";
-    img_route="";
     if(rdHipodoge.checked){
         selectedMascot=rdHipodoge.id;
         currentMokepon=mokepon_hipodoge;
-        img_route= mokepon_hipodoge.imagen;
     }else if(rdCapipepo.checked){
         selectedMascot=rdCapipepo.id;
         currentMokepon=mokepon_capipepo;
-        img_route= mokepon_capipepo.imagen;
     }else if(rdRatigueya.checked){
         selectedMascot=rdRatigueya.id;
         currentMokepon=mokepon_ratigueya;
-        img_route= mokepon_ratigueya.imagen;
     }else if(rdLangostelvis.checked){
         selectedMascot=rdLangostelvis.id;
         currentMokepon=mokepon_langostelvis;
-        img_route= mokepon_langostelvis.imagen;
     }else if(rdTucapalma.checked){
         selectedMascot=rdTucapalma.id;
         currentMokepon=mokepon_tucapalma;
-        img_route= mokepon_tucapalma.imagen;
     }else if(rdPydos.checked){
         selectedMascot=rdPydos.id;
         currentMokepon=mokepon_pydos;
-        img_route= mokepon_pydos.imagen;
     }else{
         alert("Debe seleccionar algo")
         isSelected=false;
     }  
     if(isSelected){
+        enviarMokepon(currentMokepon)
         sectionMascots.style.display = "none";
         section_mapa.style.display = "flex"
         poner_mokepon()
         let intevervalo
         intevervalo = setInterval(poner_mokepon,50)
         btnSelectMascot.disabled = true;
-        divJugador_img.src = img_route;
+        divJugador_img.src = currentMokepon.imagen;
         set_fight_background()
         cargar_tarjetas_ataque()
     }
+}
+function enviarMokepon(){
+
 }
 function poner_mokepon(){
     canvas.clearRect(0,0,mapa.width,mapa.height)
@@ -394,7 +391,15 @@ function blockButtons(){ //blocks attack buttons
     
 }
 
-
+function getPlayerId(){
+    fetch("http://localhost:8000/join").then((res)=>{
+            if(res.ok){
+                res.text().then((respuesta)=>{
+                        console.log(respuesta)
+                    })
+            }
+        })
+}
 
 function doLoad(){//function to reload the page
     location.reload();
