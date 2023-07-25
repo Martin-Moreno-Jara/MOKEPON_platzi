@@ -246,6 +246,14 @@ function poner_mokepon(){
     revisarColision(enemigo_ratigueya);
     revisarColision(enemigo_tucapalma);
 }
+function enviarPosicion(pos_x,pos_y){
+    fetch(`http://localhost:8000/mokepon/${jugador_id}/posicion`,
+    {
+        method:"post",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({x:pos_x,y:pos_y})
+    })
+}
 function poner_enemigos(){
     enemigo_capipepo.pintarMokepon();
     enemigo_hipodoge.pintarMokepon();
@@ -290,6 +298,7 @@ function mover_mokepon(e){
         }if(e.key=="ArrowDown"){
             currentMokepon.y+=5
         }
+        enviarPosicion(currentMokepon.x,currentMokepon.y)
         poner_mokepon()
     }
 }
