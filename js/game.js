@@ -220,9 +220,9 @@ function selectMascots(){ //let's player select, and selects for the enemy
         cargar_tarjetas_ataque()
     }
 }
-function enviarMokepon(mascotaActual){
-    const nombre = mascotaActual.nombre
-    fetch(`http://localhost:8000/mokepon/${jugador_id}`,
+function enviarMokepon(currentMokepon){
+    const nombre = currentMokepon.nombre
+    fetch(`http://localhost:8000/mokepon/${jugador_id}/posicion`,
     {   method:"post",
         headers:{
             "Content-Type":"application/json"
@@ -230,8 +230,15 @@ function enviarMokepon(mascotaActual){
         body:JSON.stringify({
             mokepon:nombre
         })
-    }
-    )
+    })
+    .then((res)=>{
+        if(res.ok){
+            res.json()
+                .then(function ({enemigos}){
+                    console.log(enemigos)
+                }).catch((err)=>{console.error("Error en json: ",err)})
+        }
+})
 }
 
 function poner_mokepon(){

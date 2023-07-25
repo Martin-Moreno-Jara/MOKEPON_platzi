@@ -19,20 +19,16 @@ app.get("/join",(request,response)=>{
     const jugador_id = `${Math.random()}`
     const jugador = new Jugador(jugador_id)
     lista_jugadores.push(jugador)
-    console.log(`jugador registrado: ${jugador.id}`)
     response.send(jugador_id)
 })
 app.post("/mokepon/:jugador_id",(req,res)=>{
     const jugador_id = req.params.jugador_id || "tumama"
-    console.log(`current jugador: ${jugador_id}`)
     const moke_nombre = req.body.mokepon || "null";
     const mokepon = new Mokepon(moke_nombre);
     let jugador_index = lista_jugadores.findIndex((jugador)=>jugador.id === jugador_id)
     if(jugador_index>=0){
         lista_jugadores[jugador_index].asignarMokepon(mokepon);
     }else{console.group("No asignado")}
-    console.log(`lista de jugadores:`)
-    console.log(lista_jugadores)
     res.end();
 })
 app.post("/mokepon/:jugador_id/posicion",(req,res)=>{
@@ -43,9 +39,13 @@ app.post("/mokepon/:jugador_id/posicion",(req,res)=>{
     if(jugador_index>=0){
         lista_jugadores[jugador_index].actualizarPosicion(pos_x,pos_y)
     }else{console.group("Nada enviado")}
-    console.log(pos_x,pos_y);
-    const enemigos = lista_jugadores.filter((jugador)=>jugador_id !==jugador)
-    res.send({enemigos})
+    const enemigos = lista_jugadores.filter((jugador)=>jugador_id !==jugador.id) || "erro"
+    console.log("LISTA DE ENEMIGOS--------------------------")
+    console.log(enemigos)
+
+    res.send({
+        enemigos
+    });
 })
 
 app.get("/mamaguebo",(request,response)=>{
