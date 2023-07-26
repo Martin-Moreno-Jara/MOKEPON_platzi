@@ -40,8 +40,6 @@ app.post("/mokepon/:jugador_id/posicion",(req,res)=>{
         lista_jugadores[jugador_index].actualizarPosicion(pos_x,pos_y)
     }else{console.group("Nada enviado")}
     const enemigos = lista_jugadores.filter((jugador)=>jugador_id !==jugador.id) || "erro"
-    console.log("LISTA DE ENEMIGOS--------------------------")
-    console.log(enemigos)
 
     res.send({
         enemigos

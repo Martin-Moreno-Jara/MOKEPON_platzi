@@ -30,6 +30,7 @@ let mascotAttack;// The attack the player has chosen
 let enemyAttack; //The attack the enemy has chosen
 let result; //The result of each round; victory or defeat
 let jugador_id
+let mokepones_enemigos =[]
 
 let mascotLives=3; // Lives of the player
 let enemyLives=3; // Lives of the enemy
@@ -79,25 +80,19 @@ var mokepon_langostelvis = new Mokepon("langostelvis","assets/mokepon_images/lan
 var mokepon_tucapalma = new Mokepon("tucapalma","assets/mokepon_images/tucapalma.png",3);
 var mokepon_pydos = new Mokepon("pydos","assets/mokepon_images/pydos.png",3);
 
-var enemigo_hipodoge = new Mokepon("hipodoge","assets/mokepon_images/hipodoge.webp",3,150,50,35,25);
-var enemigo_capipepo = new Mokepon("capipepo","assets/mokepon_images/capipepo.webp",3,60,60,35,25);
-var enemigo_ratigueya = new Mokepon("ratigueya","assets/mokepon_images/ratigueya.png",3,5,110,35,25);
-var enemigo_langostelvis = new Mokepon("langostelvis","assets/mokepon_images/langostelvis.png",3,180,90,35,25);
-var enemigo_tucapalma = new Mokepon("tucapalma","assets/mokepon_images/tucapalma.png",3,100,5,35,25);
-var enemigo_pydos = new Mokepon("pydos","assets/mokepon_images/pydos.png",3,250,75,35,25);
+const hipodoge_attacks = ["Agua","Tierra","Fuego","Viento"];
+const capipepo_attacks = ["Agua","Tierra","Fuego"];
+const ratigueya_attacks = ["Agua","Tierra","Fuego","Rayo"];
+const langostelvis_attacks = ["Agua","Tierra","Fuego"];
+const tucapalma_attacks = ["Agua","Tierra","Fuego","Viento"];
+const pydos_attacks = ["Agua","Tierra","Fuego","Viento","Rayo"];
 
-mokepon_hipodoge.ataques.push("Agua","Tierra","Fuego","Viento");
-enemigo_hipodoge.ataques = mokepon_hipodoge.ataques;
-mokepon_capipepo.ataques.push("Agua","Tierra","Fuego");
-enemigo_capipepo.ataques = mokepon_capipepo.ataques;
-mokepon_ratigueya.ataques.push("Agua","Tierra","Fuego","Rayo");
-enemigo_ratigueya.ataques = mokepon_ratigueya.ataques;
-mokepon_langostelvis.ataques.push("Agua","Tierra","Fuego");
-enemigo_langostelvis.ataques = mokepon_langostelvis.ataques;
-mokepon_tucapalma.ataques.push("Agua","Tierra","Fuego","Viento");
-enemigo_tucapalma.ataques = mokepon_tucapalma.ataques;
-mokepon_pydos.ataques.push("Agua","Tierra","Fuego","Viento","Rayo");
-enemigo_pydos.ataques = mokepon_pydos.ataques;
+mokepon_hipodoge.ataques.push(...hipodoge_attacks);
+mokepon_capipepo.ataques.push(...capipepo_attacks);
+mokepon_ratigueya.ataques.push(...ratigueya_attacks);
+mokepon_langostelvis.ataques.push(...langostelvis_attacks);
+mokepon_tucapalma.ataques.push(...tucapalma_attacks);
+mokepon_pydos.ataques.push(...pydos_attacks);
 
 let mokepon_array = []
 
@@ -238,13 +233,17 @@ function poner_mokepon(){
     canvas.clearRect(0,0,mapa.width,mapa.height)
     canvas.drawImage(background_map,0,0,mapa.width,mapa.height)
     currentMokepon.pintarMokepon();
-    poner_enemigos()
-    revisarColision(enemigo_capipepo);
+    enviarPosicion(currentMokepon.x,currentMokepon.y)
+    mokepones_enemigos.forEach((moke)=>{moke.pintarMokepon()
+        revisarColision(moke)})
+
+    //poner_enemigos()
+    /*revisarColision(enemigo_capipepo);
     revisarColision(enemigo_hipodoge);
     revisarColision(enemigo_langostelvis);
     revisarColision(enemigo_pydos);
     revisarColision(enemigo_ratigueya);
-    revisarColision(enemigo_tucapalma);
+    revisarColision(enemigo_tucapalma);*/
 }
 function enviarPosicion(pos_x,pos_y){
     fetch(`http://localhost:8000/mokepon/${jugador_id}/posicion`,
@@ -256,19 +255,33 @@ function enviarPosicion(pos_x,pos_y){
         if(res.ok){
             res.json()
                 .then(function ({enemigos}){
-                    console.log(enemigos)
+                    mokepones_enemigos= enemigos.map((enemigo)=>{
+                        let nombre_enemigo = enemigo.mokepon.nombre || "erro";
+                        let current_enemy;
+                        if(nombre_enemigo=="hipodoge"){
+                            current_enemy = new Mokepon("hipodoge","assets/mokepon_images/hipodoge.webp",3,150,50,35,25);
+                        }else if(nombre_enemigo=="capipepo"){
+                            current_enemy = new Mokepon("capipepo","assets/mokepon_images/capipepo.webp",3,60,60,35,25); 
+                        }else if(nombre_enemigo=="ratigueya"){
+                            current_enemy = new Mokepon("ratigueya","assets/mokepon_images/ratigueya.png",3,5,110,35,25);
+                        }else if(nombre_enemigo=="langostelvis"){
+                            current_enemy = new Mokepon("langostelvis","assets/mokepon_images/langostelvis.png",3,180,90,35,25);
+                        }else if(nombre_enemigo=="tucapalma"){
+                            current_enemy = new Mokepon("tucapalma","assets/mokepon_images/tucapalma.png",3,100,5,35,25);
+                        }else if(nombre_enemigo=="pydos"){
+                            current_enemy = new Mokepon("pydos","assets/mokepon_images/pydos.png",3,250,75,35,25);
+                        }else{console.log("por alguna razón hay un error")}
+                        current_enemy.x=enemigo.x
+                        current_enemy.y=enemigo.y
+                        return current_enemy;
+                        /*current_enemy.pintarMokepon()
+                        revisarColision(current_enemy)*/
+                    })
                 }).catch((err)=>{console.error("Error en json: ",err)})
         }
 })
 }
-function poner_enemigos(){
-    enemigo_capipepo.pintarMokepon();
-    enemigo_hipodoge.pintarMokepon();
-    enemigo_langostelvis.pintarMokepon();
-    enemigo_pydos.pintarMokepon();
-    enemigo_ratigueya.pintarMokepon();
-    enemigo_tucapalma.pintarMokepon();
-}
+
 function revisarColision(enemigo){
     const enemigo_up = enemigo.y;
     const enemgio_down = enemigo.y +enemigo.alto;
@@ -305,7 +318,6 @@ function mover_mokepon(e){
         }if(e.key=="ArrowDown"){
             currentMokepon.y+=5
         }
-        enviarPosicion(currentMokepon.x,currentMokepon.y)
         poner_mokepon()
     }
 }
