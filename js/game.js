@@ -222,7 +222,7 @@ function selectMascots(){ //let's player select, and selects for the enemy
 }
 function enviarMokepon(currentMokepon){
     const nombre = currentMokepon.nombre
-    fetch(`http://localhost:8000/mokepon/${jugador_id}/posicion`,
+    fetch(`http://localhost:8000/mokepon/${jugador_id}`,
     {   method:"post",
         headers:{
             "Content-Type":"application/json"
@@ -231,14 +231,7 @@ function enviarMokepon(currentMokepon){
             mokepon:nombre
         })
     })
-    .then((res)=>{
-        if(res.ok){
-            res.json()
-                .then(function ({enemigos}){
-                    console.log(enemigos)
-                }).catch((err)=>{console.error("Error en json: ",err)})
-        }
-})
+    
 }
 
 function poner_mokepon(){
@@ -259,7 +252,14 @@ function enviarPosicion(pos_x,pos_y){
         method:"post",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({x:pos_x,y:pos_y})
-    })
+    }).then((res)=>{
+        if(res.ok){
+            res.json()
+                .then(function ({enemigos}){
+                    console.log(enemigos)
+                }).catch((err)=>{console.error("Error en json: ",err)})
+        }
+})
 }
 function poner_enemigos(){
     enemigo_capipepo.pintarMokepon();
@@ -280,10 +280,10 @@ function revisarColision(enemigo){
     const left = currentMokepon.x;
     const right = currentMokepon.x +currentMokepon.ancho;
 
-    if(down<enemigo_up ||
-        up>enemgio_down ||
-        left>enemgio_right ||
-        right<enemigo_left){
+    if(down<enemigo_up+18 ||
+        up+18>enemgio_down ||
+        left+18>enemgio_right ||
+        right<enemigo_left+18){
             return 
         }else{
             selected_enemy = enemigo;
