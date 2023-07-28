@@ -236,14 +236,6 @@ function poner_mokepon(){
     enviarPosicion(currentMokepon.x,currentMokepon.y)
     mokepones_enemigos.forEach((moke)=>{moke.pintarMokepon()
         revisarColision(moke)})
-
-    //poner_enemigos()
-    /*revisarColision(enemigo_capipepo);
-    revisarColision(enemigo_hipodoge);
-    revisarColision(enemigo_langostelvis);
-    revisarColision(enemigo_pydos);
-    revisarColision(enemigo_ratigueya);
-    revisarColision(enemigo_tucapalma);*/
 }
 function enviarPosicion(pos_x,pos_y){
     fetch(`http://localhost:8000/mokepon/${jugador_id}/posicion`,
@@ -274,8 +266,7 @@ function enviarPosicion(pos_x,pos_y){
                         current_enemy.x=enemigo.x
                         current_enemy.y=enemigo.y
                         return current_enemy;
-                        /*current_enemy.pintarMokepon()
-                        revisarColision(current_enemy)*/
+
                     })
                 }).catch((err)=>{console.error("Error en json: ",err)})
         }
@@ -334,39 +325,46 @@ function moverDerecha(){
     currentMokepon.x+=5
 }
 
-function selectEnemy(min,max){ //selects an enemy
-    let randomNumber = generate_random(min,max);
-    enemy=mokepon_array[randomNumber];
-    return enemy;
-}
 function waterAttack(){ //attacks for each type 
     mascotAttack=attackOptions[2];
-    selectEnemyAttack();
+    enviarAtaques();
     combatResult()
 }
 function fireAttack(){
     mascotAttack=attackOptions[1];
-    selectEnemyAttack();
+    enviarAtaques();
     combatResult()
 }
 function earthAttack(){
     mascotAttack=attackOptions[3];
-    selectEnemyAttack();
+    enviarAtaques();
     combatResult()
 }
 function windAttack(){
     mascotAttack=attackOptions[4];
-    selectEnemyAttack();
+    enviarAtaques();
     combatResult();
 }
 function lightningAttack(){
     mascotAttack=attackOptions[5];
-    selectEnemyAttack();
+    enviarAtaques();
     combatResult();
 }
-function selectEnemyAttack(){ // selects and attack for the enemy
-    var number = generate_random(0,selected_enemy.ataques.length-1);
-    enemyAttack=selected_enemy.ataques[number] 
+function enviarAtaques(){ // selects and attack for the enemy
+    fetch(`http://localhost:8000/mokepon/${jugador_id}/ataques`,{
+        method:"post",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+            ataque:mascotAttack
+        })
+    })
+        .then((res)=>{
+            if(res.ok){
+                res.json()
+                    .then(({ataque})=>{
+                        console.log(ataque)
+                    })
+            }})
 }
 
 function combatResult(){ //evaluates the attacks and gives the output, life deduction

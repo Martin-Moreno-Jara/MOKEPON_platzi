@@ -38,12 +38,18 @@ app.post("/mokepon/:jugador_id/posicion",(req,res)=>{
     let jugador_index = lista_jugadores.findIndex((jugador)=>jugador.id === jugador_id)
     if(jugador_index>=0){
         lista_jugadores[jugador_index].actualizarPosicion(pos_x,pos_y)
-    }else{console.group("Nada enviado")}
+    }else{console.log("Nada enviado")}
     const enemigos = lista_jugadores.filter((jugador)=>jugador_id !==jugador.id) || "erro"
 
     res.send({
         enemigos
     });
+})
+app.post("/mokepon/:jugador_id/ataques",(req,res)=>{
+    const jugador_id = req.params.jugador_id;
+    const ataque = req.body.ataque || "etwas hat passiert"
+    console.log(ataque);
+    res.send({ataque});
 })
 
 app.get("/mamaguebo",(request,response)=>{
