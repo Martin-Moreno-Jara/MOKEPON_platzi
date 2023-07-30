@@ -4,6 +4,7 @@ const port = 8000;
 const cors = require('cors')
 const Jugador = require("./jugador.js");
 const lista_jugadores = []
+
 class Mokepon{
     constructor(nombre){
         this.nombre=nombre
@@ -11,10 +12,8 @@ class Mokepon{
 }
 app.use(cors())
 app.use(express.json())
+app.use(express.static('public'))
 
-app.get("/",(request,response)=>{
-        response.send("Hola")
-})
 app.get("/join",(request,response)=>{
     const jugador_id = `${Math.random()}`
     const jugador = new Jugador(jugador_id)
