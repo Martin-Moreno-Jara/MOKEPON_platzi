@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOKEPON</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <header >
+     <div class="head-foot">
+        <h1 class="main-titulo">MOKEPON </h1> 
+    </div>
+    </header>
+
+    <section id="mascotSelect">
+
+        <h2 class="main-subtitulo">Elige tu mascota</h2>
+
+        <div id="div_tarjetas_mokepon" class="tarjetas">
+            
+        </div>
+
+        <p>
+            <button class="btnSelect" id="btnSelectMascot">Seleccionar</button>
+        </p>
+    </section>
+
+    <section id="vista-mapa">
+        <h1 class="main-subtitulo">Recorre el mapa</h1>
+        <canvas id="mapa"></canvas>
+            <button class="btnSelect" onmousedown="moverArriba()">Arriba</button>
+        <div id="botones-moverse">
+            <button class="btnSelect" onClick="moverIzquierda()">Izquierda</button>
+            <button class="btnSelect" onClick="moverAbajo()">Abajo</button>
+            <button class="btnSelect" onClick="moverDerecha()">Derecha</button>
+        </div>
+
+    </section>
+
+    <section id="attackSelect">
+
+        <h2 class="main-subtitulo">Elige tu ataque</h2>
+        <div id="div_tarjetas_ataques" class="tarjetasAtaques">
+            
+        </div>
+            <div id="messages">
+                <p id="resultado" class="normal-text">Ataca para empezar</p>
+                
+                <section id="repeatGame">
+                    <button id="btnReload">Reiniciar</button>
+                </section>
+            </div>
+
+            <div class="ataquePadre">
+                <div class="ataqueJugador">
+                    <span id="mascotName"></span>
+                    <div >
+                        <img class="imagen" id="jugador_imagen">
+                    </div>
+                    <span id="mascotLives"></span>
+                    <p id="ataqueJugador"></p>
+            </div>
+                <div class="ataqueEnemigo">
+                    <span id="enemyName"></span>
+                    <div>
+                        <img class="imagen" id="enemigo_imagen">
+                    </div>
+                    <span id="enemyLives"></span>
+                    <p id="ataqueEnemigo"></p>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <footer class="head-foot exp">
+        <div class="normal-text">
+            <p>Martin Moreno Jara</p>
+            <p>2023 derechos reservados</p>
+        </div>
+    </footer>
+    <script src="./Mokepon.js"></script>
+    <script src="./game.js"></script>>
+</body>
+</html>
