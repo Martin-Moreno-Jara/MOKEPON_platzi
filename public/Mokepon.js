@@ -1,10 +1,11 @@
   class Mokepon {
 
-    constructor(nombre,imagen,vida,x=20,y=5,ancho=60,alto=35){
+    constructor(nombre,imagen,vida,x=20,y=5,ancho=35,alto=25,id=null){
         this.nombre = nombre;
-        this.imagen= imagen;
-        this.vida= vida
-        this.ataques = []
+        this.id=id;
+        this.imagen= imagen || null;
+        this.vida= vida || null;
+        this.ataques = [] 
         this.canvasImg = new Image()
         this.canvasImg.src = this.imagen
         this.x=x

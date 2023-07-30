@@ -115,7 +115,7 @@ gap: 20px;
     margin-bottom: 20px;
 }
 #attackSelect{
-    background-image: url("../assets/background_fight/fight1.webp");
+    background-image: url("./assets/background_fight/fight1.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -218,7 +218,6 @@ input:hover + label {
 }
 .btnSelect:hover{
     border: 4px solid black
-
 }
 
 #vista-mapa{
