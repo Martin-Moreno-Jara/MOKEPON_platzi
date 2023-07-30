@@ -1,6 +1,6 @@
   class Mokepon {
 
-    constructor(nombre,imagen,vida,x=20,y=5,ancho=60,alto=35,id=null){
+    constructor(nombre,imagen,vida,x=20,y=5,ancho=35,alto=25,id=null){
         this.nombre = nombre;
         this.id=id;
         this.imagen= imagen || null;

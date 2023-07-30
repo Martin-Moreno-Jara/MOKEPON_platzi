@@ -12,5 +12,8 @@ class Jugador{
         this.x=x;
         this.y=y;
     }
+    setAtaque(attack){
+        this.ataque = attack;
+    }
 }
 module.exports = Jugador;

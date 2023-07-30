@@ -48,12 +48,25 @@ app.post("/mokepon/:jugador_id/posicion",(req,res)=>{
 app.post("/mokepon/:jugador_id/ataques",(req,res)=>{
     const jugador_id = req.params.jugador_id;
     const ataque = req.body.ataque || "etwas hat passiert"
-    console.log(ataque);
+    let jugador_index = lista_jugadores.findIndex((jugador)=>jugador.id === jugador_id)
+    if(jugador_index>=0){
+        lista_jugadores[jugador_index].setAtaque(ataque)
+    }else{console.log("Nada enviado en ataques")}
     res.send({ataque});
 })
+app.get("/mokepon/:jugador_id/ataques/:jugador_enemigo",(req,res)=>{
+    const jugador_id = req.params.jugador_id;
+    const enemigo_id = req.params.jugador_enemigo;
+    let ataque_enemigo;
+    let jugador_index = lista_jugadores.findIndex((jugador)=>jugador.id === jugador_id)
+    let enemigo_index = lista_jugadores.findIndex((jugador)=>jugador.id === enemigo_id)
+    if(jugador_index>=0 && enemigo_index>=0){
+        ataque_enemigo = lista_jugadores[enemigo_index].ataque;
+        lista_jugadores[enemigo_index].ataque = undefined;
+    }else{console.log("Nada recibido en ataques");
+    }
+    res.send({ ataque_enemigo })});
+    
 
-app.get("/mamaguebo",(request,response)=>{
-    response.send("Mamaguebo")
-})
 app.listen(port,()=>{console.log(`El servidor ${port} va volando`)})
 
